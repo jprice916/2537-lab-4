@@ -3,8 +3,10 @@ console.log("js file loaded");
 let offset = 0;
 let limit = 10;
 let loading = false;
-
+let loader = document.getElementById('spinner');
 async function loadPokemon() {
+    
+    loader.hidden = true;
     if (loading) return;
     loading = true;
 
@@ -40,13 +42,21 @@ function capitalize(str) {
 }
 loadPokemon();
 
-document.addEventListener("scroll", function () {
-    let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
-    let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
-    let clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
-    if (scrollTop + clientHeight >= scrollHeight) {
+document.getElementById('load').addEventListener('click', () => {
+    loader.hidden = false;
+    setTimeout(() => {
         loadPokemon();
+    loader.hidden = true;
+    }, 500);
+    
+})
+// document.addEventListener("scroll", function () {
+//     let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+//     let scrollHeight = document.documentElement.scrollHeight || document.body.scrollHeight;
+//     let clientHeight = document.documentElement.clientHeight || document.body.clientHeight;
+//     if (scrollTop + clientHeight >= scrollHeight) {
+//         loadPokemon();
 
-    }
-});
+//     }
+// });
 
